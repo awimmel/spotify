@@ -32,4 +32,6 @@ This is a simple web application that takes users' JSON streaming history files 
 - The analysis of users' streaming histories is pretty trivial at the moment. In the future, I should work on developing more complex measures of users' habits.
 - The current solution for finding a user's top artists and songs is far from the most efficient solution.
 - Microsoft's PowerBI could be useful in the future as I look for graphical ways to represent each user's data.
+- Making calls to Spotify's API would provide users with even more details into their listening habits, and I should definitely research its potential uses more in the future.
+- Utilizing the Vuex's store functionality will be very useful as the application continues to grow
 - Of course, the application's styling could also be drastically improved.
