@@ -28,11 +28,11 @@ async function loginUser(user) {
   const client = await getClient();
   const loginResponse = await client.db(dbName).collection(collectionName).find({username: user.username}).toArray();
   if(loginResponse.length === 0)
-    return;
+    return null;
 
   const success = await bcrypt.compare(user.password, loginResponse[0].password);
   if(!success)
-    return;
+    return null;
 
   return loginResponse[0]._id;
 }

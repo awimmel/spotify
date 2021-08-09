@@ -22,11 +22,6 @@ app.get('/', async (req, res) => {
 app.post('/login', async (req, res) => {
   const userLogin = req.body;
   const response = await loginUser(userLogin);
-  if(!response){
-    res.status(404).send('Incorrect username or password.');
-    return;
-  }    
-
   res.send(response)
 });
 
