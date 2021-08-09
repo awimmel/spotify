@@ -29,4 +29,4 @@ This is a simple web application that takes users' JSON streaming history files 
 - The analysis of users' streaming histories is pretty trivial at the moment. In the future, I should work on developing more complex measures of users' habits.
 - The current solution for finding a user's top artists and songs is far from the most efficient solution.
 - Microsoft's PowerBI could be useful in the future as I look for graphical ways to represent each user's data.
-
+- Of course, the application's styling could also be drastically improved.
