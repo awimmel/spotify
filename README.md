@@ -20,8 +20,11 @@ This is a simple web application that takes users' JSON streaming history files 
 - [Morgan v1.10.0](https://www.npmjs.com/package/morgan)
 
 # Current State
-- Logging in and creating users seems to work, but definitely has some bugs that need to be fixed. For instance, a graceful way to handle rejected login requests needs to be added.
+- Logging in and creating users seems to work, but definitely has some bugs that need to be fixed.
 - Users can upload files once they're signed in, and a Quasar table displays some simple statistics regarding their listening habits.
+
+# Recent Updates
+- Most recent push allows automatic sign-in for newly created users and provides a more graceful to handle failed login attempts
 
 # Future work
 - Uploaded JSON files need to be stored in MongoDB and tied to their corresponding users. This will allow for users to leave the site and review their analysis on a subsequent visit.
