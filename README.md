@@ -27,6 +27,6 @@ This is a simple web application that takes users' JSON streaming history files 
 - Uploaded JSON files need to be stored in MongoDB and tied to their corresponding users. This will allow for users to leave the site and review their analysis on a subsequent visit.
 - Certain actions for users, such as signing out, keeping a user logged in upon a page refresh, and changing their username/password are necessary features to add soon.
 - The analysis of users' streaming histories is pretty trivial at the moment. In the future, I should work on developing more complex measures of users' habits.
-- The current solution for finding a user's top artist is far from the most efficient solution.
+- The current solution for finding a user's top artists and songs is far from the most efficient solution.
 - Microsoft's PowerBI could be useful in the future as I look for graphical ways to represent each user's data.
 
