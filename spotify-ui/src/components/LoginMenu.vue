@@ -1,7 +1,6 @@
 <template>
   <div>
     <q-btn-dropdown label="Login" @hide="resetVars()">
-      <!-- <q-btn-dropdown label="Login"> -->
       <q-item>
         <q-input v-model="username" label="Username" />
       </q-item>
@@ -34,9 +33,10 @@
         <q-item>
           <q-btn
             @click="createNew = true"
-            flat
+            color="primary"
             label="Create Account"
             :disable="signingIn"
+            align="left"
           />
         </q-item>
       </div>
@@ -61,6 +61,7 @@
             label="Create Account"
             :disable="createForbidden"
             v-close-popup
+            align="left"
           />
         </q-item>
       </div>
@@ -100,13 +101,13 @@ export default defineComponent({
 
     const loginUser = async () => {
       signingIn.value = true;
-      const userId = await processLogin(username.value, password.value);
-      if (userId.length === 0) {
+      const loginResponse = await processLogin(username.value, password.value);
+      if (loginResponse.userId.length === 0 || loginResponse.username.length === 0) {
         invalidLogin.value = true;
       } else {
         emit('userLogin', {
-          id: userId,
-          username: username.value
+          id: loginResponse.userId,
+          username: loginResponse.username
         });
       }
       signingIn.value = false;

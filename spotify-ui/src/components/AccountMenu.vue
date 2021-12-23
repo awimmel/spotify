@@ -18,18 +18,34 @@
         </template>
       </q-field>
     </q-item>
+    <q-item>
+      <q-btn
+            @click="logout"
+            color="primary"
+            label="Logout"
+            v-close-popup
+      />
+    </q-item>
   </q-btn-dropdown>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
 import User from '../models/User';
+import { logoutUser } from '../services/userServices';
 
 export default defineComponent({
   name: 'LoginMenu',
   props: { user: Object as PropType<User> },
-  setup(props) {
-    return { props };
+  setup(props, { emit }) {
+    const logout = async () => {
+      if(props.user){
+        await logoutUser(props.user.id);
+      }
+      emit('userLogout', {id: ''});
+    };
+
+    return { props, logout };
   }
 });
 </script>

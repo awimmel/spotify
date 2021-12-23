@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^1.0.0",
+    "vue-cookies": "^1.7.4",
     "vuex-class": "^0.3.2"
   },
   "devDependencies": {

@@ -20,19 +20,34 @@
       class="q-mt-sm float-right"
       @click="submitFiles"
     />
+    <q-dialog v-model="failedInsert">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Invalid username and password combination</div>
+        </q-card-section>
+        <q-card-section class="q-pt-none">
+          Please try logging in again.
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api';
 import Song from '../models/Song';
+import { storeRawData } from '../services/streamingDataServices';
 
 export default defineComponent({
   name: 'FileUpload',
   props: {},
-  setup(_, {emit}) {
+  setup(_, {emit, root}) {
     const submittedFiles = ref<File[] | null>(null);
     const streamHist = ref<Song[]>([]);
+    const failedInsert = ref<boolean>();
 
     const submitFiles = async function() {
       if(submittedFiles.value != null){
@@ -41,7 +56,10 @@ export default defineComponent({
         }
       }
       submittedFiles.value = null;
-      emit('submissionComplete', streamHist.value);
+      failedInsert.value = !await storeRawData({userId: root.$route.params.userId, songs: streamHist.value});
+      if(!failedInsert.value){
+        emit('submissionComplete', streamHist.value);
+      }
     }
 
     //Reading submitted JSON, returning a promise so read result can be awaited in submitFiles
@@ -57,7 +75,7 @@ export default defineComponent({
         jsonReader.readAsText(currentJson);
       });
     }
-    return{ submittedFiles, submitFiles }
+    return{ submittedFiles, submitFiles, failedInsert }
   }
 });
 </script>

@@ -16,17 +16,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, ref, onMounted } from '@vue/composition-api';
 import FileUpload from 'components/FileUpload.vue';
 import StreamData from 'components/StreamData.vue';
 import Song from '../models/Song';
+import { retrieveRawData } from '../services/streamingDataServices';
 
 export default defineComponent({
   name: 'AnalysisHome',
   components: { FileUpload, StreamData },
-  setup() {
-    const uploadEnabled = true;
+  setup(_, { root }) {
+    const uploadEnabled = ref<boolean>(true);
     const songsPlayed = ref<Song[]>();
+    onMounted(async () => {
+      songsPlayed.value = await retrieveRawData(root.$route.params.userId);
+      if(songsPlayed.value.length > 0)
+        uploadEnabled.value = false;
+    });
     return { uploadEnabled, songsPlayed };
   }
 });
